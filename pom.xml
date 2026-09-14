@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.voiceassistant</groupId>
+    <artifactId>voice-assistant</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- every external library the project needs goes here -->
+    <dependencies>
+
+        <!-- Vosk does the speech-to-text (offline, no internet needed) -->
+        <dependency>
+            <groupId>com.alphacephei</groupId>
+            <artifactId>vosk</artifactId>
+            <version>0.3.45</version>
+        </dependency>
+
+        <!-- FreeTTS is what makes the assistant talk back -->
+        <dependency>
+            <groupId>net.sf.sociaal</groupId>
+            <artifactId>freetts</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.sociaal</groupId>
+            <artifactId>freetts-jsapi10</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
+        <!-- JLayer lets Java play mp3 files with real pause/skip control -->
+        <dependency>
+            <groupId>com.googlecode.soundlibs</groupId>
+            <artifactId>jlayer</artifactId>
+            <version>1.0.1.4</version>
+        </dependency>
+
+        <!-- org.json makes reading the weather API response easy -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+        </dependency>
+
+        <!-- JUnit is only used for testing, it never ships in the final jar -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- this plugin is what actually runs the tests in src/test/java -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+
+            <!-- this plugin bundles all the dependencies into ONE runnable jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>shade</goal></goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.voiceassistant.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
