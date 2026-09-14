@@ -1,0 +1,7 @@
+target/
+*.class
+.idea/
+*.iml
+vosk-model-*/
+music/*.mp3
+.DS_Store
