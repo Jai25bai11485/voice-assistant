@@ -25,17 +25,9 @@
             <version>0.3.45</version>
         </dependency>
 
-        <!-- FreeTTS is what makes the assistant talk back -->
-        <dependency>
-            <groupId>net.sf.sociaal</groupId>
-            <artifactId>freetts</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.sociaal</groupId>
-            <artifactId>freetts-jsapi10</artifactId>
-            <version>1.2.2</version>
-        </dependency>
+        <!-- No library is needed for text-to-speech: SpeechSynthesizer calls the
+             operating system's own built-in speech engine (PowerShell/say/espeak)
+             through ProcessBuilder instead, so there is nothing extra to download here -->
 
         <!-- JLayer lets Java play mp3 files with real pause/skip control -->
         <dependency>

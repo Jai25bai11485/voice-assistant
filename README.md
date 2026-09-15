@@ -26,7 +26,7 @@ workflow, use case, class, and sequence diagrams.
 | Language | Java 17 |
 | Build tool | Maven |
 | Speech-to-text (offline) | [Vosk](https://alphacephei.com/vosk/) |
-| Text-to-speech | [FreeTTS](http://freetts.sourceforge.net/) |
+| Text-to-speech | Operating system's own speech engine (Windows `System.Speech` via PowerShell, macOS `say`, Linux `espeak`) — no extra library needed |
 | MP3 playback | [JLayer](http://www.javazoom.net/javalayer/javalayer.html) |
 | JSON parsing (Vosk output, weather API) | org.json |
 | Microphone/audio capture | Java Sound API (`javax.sound.sampled`, built into Java) |
@@ -126,8 +126,11 @@ and the spoken response.
   speech API would improve accuracy at the cost of size/latency/privacy/money.
 - Command matching uses plain keyword checks, not true natural language
   understanding, so phrasing has to roughly match the coded keywords.
-- FreeTTS's default voice sounds robotic — a known limitation of free offline
-  TTS engines.
+- Voice quality depends on your OS's built-in voice — Windows and Mac sound
+  reasonably natural, Linux's `espeak` sounds robotic by comparison.
+- On Linux, `espeak` must be installed separately (`sudo apt install espeak`)
+  since Linux does not ship a speech engine by default. Windows and macOS need
+  no install — their speech engines are already built in.
 - JLayer does not support true pause/resume, so "pause" currently stops
   playback at the current track rather than resuming mid-song.
 
