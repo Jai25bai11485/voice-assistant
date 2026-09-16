@@ -6,12 +6,12 @@ These describe **how well** the system behaves, not what features it has.
 The assistant must respond to a recognized command within about 1-2 seconds on a
 normal laptop, so the conversation feels natural instead of laggy. This is why the
 microphone listening loop and the timer countdown each run on their own background
-thread — neither one is allowed to block the main response path.
+thread - neither one is allowed to block the main response path.
 
 ## 2. Reliability
 A single failure (microphone briefly disconnecting, a website not opening, a weather
-API timeout) must not crash the whole assistant. Every risky operation — file I/O,
-network calls, launching external processes — is wrapped in a try/catch block that
+API timeout) must not crash the whole assistant. Every risky operation - file I/O,
+network calls, launching external processes - is wrapped in a try/catch block that
 reports the problem out loud and keeps listening for the next command.
 
 ## 3. Usability
@@ -27,7 +27,7 @@ memory use and startup time low enough to run comfortably on an average laptop.
 
 ## 5. Maintainability
 New commands can be added by creating one new class that implements the `Command`
-interface and registering it in `Main.java` — no existing command classes need to be
+interface and registering it in `Main.java` - no existing command classes need to be
 changed. This is the direct benefit of using the Command design pattern.
 
 ## 6. Error Handling Strategy

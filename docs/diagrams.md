@@ -29,6 +29,6 @@ from the microphone picking up sound to the assistant speaking back.
 ![Sequence Diagram](diagrams/sequence-diagram.png)
 
 ## ER Diagram / Database Schema
-**Not applicable.** This project does not use a database or any persistent storage —
+**Not applicable.** This project does not use a database or any persistent storage -
 all data (recognized text, command results) exists only in memory while the program
 runs, and mp3 files are simply read from a folder on disk.
