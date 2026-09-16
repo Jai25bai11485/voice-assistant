@@ -10,8 +10,8 @@ workflow, use case, class, and sequence diagrams.
 
 ## Features
 
-- Tell the current time and date
-- Lock or shut down the computer
+- Tells the current time and date
+- Locks or shut down the computer
 - Open common desktop apps (calculator, notepad, terminal, code editor)
 - Search Google, YouTube, or Wikipedia in the default browser
 - Play, pause, or skip local MP3 tracks
@@ -21,26 +21,26 @@ workflow, use case, class, and sequence diagrams.
 
 ## Technologies & Tools Used
 
-| Purpose | Tool / Library |
-|---|---|
-| Language | Java 17 |
-| Build tool | Maven |
-| Speech-to-text (offline) | [Vosk](https://alphacephei.com/vosk/) |
-| Text-to-speech | Operating system's own speech engine (Windows `System.Speech` via PowerShell, macOS `say`, Linux `espeak`) — no extra library needed |
-| MP3 playback | [JLayer](http://www.javazoom.net/javalayer/javalayer.html) |
-| JSON parsing (Vosk output, weather API) | org.json |
-| Microphone/audio capture | Java Sound API (`javax.sound.sampled`, built into Java) |
-| Launching apps/OS actions | `ProcessBuilder`, `Desktop` API (built into Java) |
-| Testing | JUnit 5 |
+| Purpose | Tool / Library                                                                                                                       |
+|---|--------------------------------------------------------------------------------------------------------------------------------------|
+| Language | Java 17                                                                                                                              |
+| Build tool | Maven                                                                                                                                |
+| Speech-to-text (offline) | [Vosk](https://alphacephei.com/vosk/)                                                                                                |
+| Text-to-speech | Operating system's own speech engine (Windows `System.Speech` via PowerShell, macOS `say`, Linux `espeak`) - no extra library needed |
+| MP3 playback | [JLayer](http://www.javazoom.net/javalayer/javalayer.html)                                                                           |
+| JSON parsing (Vosk output, weather API) | org.json                                                                                                                             |
+| Microphone/audio capture | Java Sound API (`javax.sound.sampled`, built into Java)                                                                              |
+| Launching apps/OS actions | `ProcessBuilder`, `Desktop` API (built into Java)                                                                                    |
+| Testing | JUnit 5                                                                                                                              |
 
 ## Core Concepts Used
 
-- **Multithreading** — the microphone listens on its own background thread, and each timer runs on its own thread, so nothing freezes the assistant while it waits.
-- **Command Design Pattern** — every voice action is its own class implementing the `Command` interface, so new commands can be added without touching existing ones.
-- **I/O Streams** — reading raw audio bytes from the microphone and MP3 bytes from disk.
-- **ProcessBuilder & Desktop API** — used to launch local apps and open the browser.
-- **String manipulation & Regular Expressions** — cleaning transcribed text and pulling numbers out of sentences (e.g. for the timer).
-- **Exception handling** — every risky operation (mic access, file access, network calls, launching processes) is wrapped so one failure doesn't crash the whole program.
+- **Multithreading** - the microphone listens on its own background thread, and each timer runs on its own thread, so nothing freezes the assistant while it waits.
+- **Command Design Pattern** - every voice action is its own class implemeniting the `Command` interface, so new commands can be added without touching existing ones.
+- **I/O Streams** - reading raw audio bytes from the microphonee and MP3 bytes from disk.
+- **ProcessBuilder & Desktop API** - used to launch local apps and open the browser.
+- **String manipulation & Regular Expresions** - cleaning transcribed text and pulling numbers out of sentences (e.g. for the timer).
+- **Exception handling** - every risky operation (mic access, file access, network calls, launching processes) is wrapped so one failure doesn't crash the whole program.
 
 ## Project Structure
 
@@ -66,9 +66,9 @@ voice-assistant/
 ## Steps to Install & Run
 
 ### 1. Install the tools
-- **Java 17+ (JDK)** — check with `java -version` — https://adoptium.net
-- **Maven** — check with `mvn -version` — https://maven.apache.org/download.cgi
-- **IntelliJ IDEA** (Community edition is free) — https://www.jetbrains.com/idea/download
+- **Java 17+ (JDK)** - check with `java -version` - https://adoptium.net
+- **Maven** - check with `mvn -version` - https://maven.apache.org/download.cgi
+- **IntelliJ IDEA** (Community edition is free) - https://www.jetbrains.com/idea/download
 
 ### 2. Download the Vosk speech model
 Vosk needs a language model file, downloaded separately (it is too large to bundle):
@@ -121,22 +121,22 @@ and the spoken response.
 
 ## Known Limitations
 
-- Recognition accuracy is limited by the small offline Vosk model — trading
+- Recognition accuracy is limited by the small ofline Vosk model - trading
   accuracy for speed, size, and zero cost. A larger Vosk model or a cloud
   speech API would improve accuracy at the cost of size/latency/privacy/money.
 - Command matching uses plain keyword checks, not true natural language
   understanding, so phrasing has to roughly match the coded keywords.
-- Voice quality depends on your OS's built-in voice — Windows and Mac sound
+- Voice quality depends on your OS's built-in voice - Windows and Mac sound
   reasonably natural, Linux's `espeak` sounds robotic by comparison.
 - On Linux, `espeak` must be installed separately (`sudo apt install espeak`)
   since Linux does not ship a speech engine by default. Windows and macOS need
-  no install — their speech engines are already built in.
-- JLayer does not support true pause/resume, so "pause" currently stops
+  no install - their spech engines are already built in.
+- JLayer does not support true pause / resume, so "pause" currently stops
   playback at the current track rather than resuming mid-song.
 
 ## Future Enhancements
 
-- Swap in a larger Vosk model or a cloud STT/NLU service for better accuracy
-- Add fuzzy/synonym matching so more phrasings of the same command work
+- Swap in a larger Vosk model or a cloud STT / NLU service for better accuracy
+- Add fuzzy / synonym matching so more phrasings of the same command work
 - Add a small GUI instead of console-only output
-- Persist a command history/log to disk for review
+- Persist a command history / log to disk for review

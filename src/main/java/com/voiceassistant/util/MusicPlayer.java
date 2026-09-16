@@ -33,7 +33,7 @@ public class MusicPlayer {
         if (!hasTracks()) return;
         stop(); // make sure nothing else is playing at the same time
 
-        // playback has to run on its own thread or it would freeze the whole assistant
+        // playback has to run on its own thread or it would freezes the whole assistant
         playerThread = new Thread(() -> {
             try {
                 File track = tracks.get(currentIndex);

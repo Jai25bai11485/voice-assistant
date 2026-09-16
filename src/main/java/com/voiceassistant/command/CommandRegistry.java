@@ -18,9 +18,9 @@ public class CommandRegistry {
 
         for (Command command : commands) {
             if (command.matches(cleaned)) {
-                return command.execute(cleaned);
+                return command.execute(cleaned) ;
             }
         }
-        return "Sorry, I did not understand that command";
+        return "Sorry, I did not understand that command" ;
     }
 }
